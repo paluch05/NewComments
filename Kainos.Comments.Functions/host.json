@@ -1,18 +1,18 @@
 {
   "version": "2.0",
-  "logging": {
-     // "fileLoggingMode": "debugOnly", // poziom, never, always i DO
-    "logLevel": {
-      "Function.MyFunction": "Information",
-      "default": "None"
-    },
-    "applicationInsights": {
-      "samplingSettings": {
-        "isEnabled": true, // redukuje obciazenie ruchu i db
-        "excludedTypes": "Request" // wykluczone z sampli
-      }
-    }
-  }
+  //"logging": {
+  //   // "fileLoggingMode": "debugOnly", // poziom, never, always i DO
+  //  "logLevel": {
+  //    "Function.MyFunction": "Information",
+  //    "default": "None"
+  //  },
+  //  "applicationInsights": {
+  //    "samplingSettings": {
+  //      "isEnabled": true, // redukuje obciazenie ruchu i db
+  //      "excludedTypes": "Request" // wykluczone z sampli
+  //    }
+  //  }
+  //}
 }
 
 

@@ -3,6 +3,8 @@ using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Extensions;
 using Kainos.Comments.Functions;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 [assembly:FunctionsStartup(typeof(Startup))]
 
@@ -12,7 +14,22 @@ namespace Kainos.Comments.Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
+            JsonConvert.DefaultSettings = () =>
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+
             var cosmosDbConfiguration = GetCosmosDbConfiguration();
+
+            builder.Services.Configure<CosmosDbConfiguration>(configuration =>
+            {
+                configuration.CosmosDbConnectionString = cosmosDbConfiguration.CosmosDbConnectionString;
+                configuration.DatabaseName = cosmosDbConfiguration.DatabaseName;
+                configuration.CommentContainerName = cosmosDbConfiguration.CommentContainerName;
+                configuration.BlackListContainerName = cosmosDbConfiguration.BlackListContainerName;
+            });
 
             builder.Services.AddApplication(cosmosDbConfiguration);
         }
@@ -23,7 +40,8 @@ namespace Kainos.Comments.Functions
             {
                 CosmosDbConnectionString = Environment.GetEnvironmentVariable("CosmosDbConnectionString"),
                 DatabaseName = Environment.GetEnvironmentVariable("DatabaseName"),
-                ContainerName = Environment.GetEnvironmentVariable("ContainerName")
+                CommentContainerName = Environment.GetEnvironmentVariable("CommentContainerName"),
+                BlackListContainerName = Environment.GetEnvironmentVariable("BlackListContainerName")
             };
         }
     }

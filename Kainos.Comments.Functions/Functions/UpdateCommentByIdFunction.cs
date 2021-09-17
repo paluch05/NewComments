@@ -2,7 +2,6 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Validators;
@@ -63,9 +62,7 @@ namespace Kainos.Comments.Functions.Functions
 
             try
             {
-
-
-                var updateCommentResponse = _repository.ExecuteAsync(updateCommentRequest);
+                var updateCommentResponse = await _repository.ExecuteAsync(updateCommentRequest);
 
                 log.LogInformation("Comment successfully updated.");
 

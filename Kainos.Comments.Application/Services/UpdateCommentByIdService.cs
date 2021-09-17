@@ -1,7 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
-using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Application.Model.Domain;
 using Microsoft.Extensions.Logging;
@@ -33,7 +34,7 @@ namespace Kainos.Comments.Application.Services
 
             try
             {
-                 await _cosmosDb.UpdateCommentByIdAsync(request.Id, updateComment);
+                await _cosmosDb.UpdateCommentByIdAsync(request.Id, updateComment);
             }
             catch (Exception e)
             {

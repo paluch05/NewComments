@@ -29,7 +29,8 @@ namespace Kainos.Comments.Application.Services
                 Id = Guid.NewGuid().ToString(),
                 Author = request.Author,
                 Text = request.Text,
-                CreationDate = DateTime.UtcNow
+                CreationDate = DateTime.UtcNow,
+                IsCensored = false
             };
 
             var addedComment = await _cosmosDbService.AddCommentAsync(comment);

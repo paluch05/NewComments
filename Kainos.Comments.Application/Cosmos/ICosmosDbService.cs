@@ -16,5 +16,7 @@ namespace Kainos.Comments.Application.Cosmos
         Task UpdateCommentByIdAsync(string id, Comment comment);
 
         Task DeleteCommentByIdAsync(string id);
+
+        public Task<IEnumerable<BlackListItem>> GetAllBadWords();
     }
 }

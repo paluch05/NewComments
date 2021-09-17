@@ -9,3 +9,14 @@ C:\Users\4743\source\repos\Solution1\Kainos.Comments.Application\obj\Debug\netco
 C:\Users\4743\source\repos\Solution1\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.csproj.CoreCompileInputs.cache
 C:\Users\4743\source\repos\Solution1\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.dll
 C:\Users\4743\source\repos\Solution1\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.pdb
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\bin\Debug\netcoreapp3.1\Microsoft.Azure.Cosmos.ServiceInterop.dll
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\bin\Debug\netcoreapp3.1\Cosmos.CRTCompat.dll
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\bin\Debug\netcoreapp3.1\Kainos.Comments.Application.deps.json
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\bin\Debug\netcoreapp3.1\Kainos.Comments.Application.dll
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\bin\Debug\netcoreapp3.1\Kainos.Comments.Application.pdb
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.csproj.AssemblyReference.cache
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.AssemblyInfoInputs.cache
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.AssemblyInfo.cs
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.csproj.CoreCompileInputs.cache
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.dll
+C:\Users\4743\source\repos\NewComments\Kainos.Comments.Application\obj\Debug\netcoreapp3.1\Kainos.Comments.Application.pdb

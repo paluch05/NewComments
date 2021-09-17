@@ -1,4 +1,6 @@
-﻿namespace Kainos.Comments.Application.Model.Domain
+﻿using System;
+
+namespace Kainos.Comments.Application.Model.Domain
 {
     public class UpdateCommentResponse
     {
