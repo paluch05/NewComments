@@ -47,10 +47,6 @@ namespace Kainos.Comments.Functions
     }
 }
 
-// jak pojawiaja sie local.settings z powyzszym, jak environment sie laczy z json, jak zmienna z pliku zamienia sie w zmienna srodowiskowa
-// co to zmienna srodowiskowa 
-
-
 
 // cosmos trigger, queue trigger z cenzura slow. baza z brzydkimi slowkami i zamieniane sa na gwiazdki, jedna kolekcja z comment, druga black list.
 // azure storage queue, http trigger, blacklist ma miec recordy kazde slowo osobno

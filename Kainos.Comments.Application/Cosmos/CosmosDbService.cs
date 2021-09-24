@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Model.Database;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
@@ -27,11 +27,19 @@ namespace Kainos.Comments.Application.Cosmos
             _log = log;
         }
 
-        public Task<IEnumerable<Comment>> GetAllComments()
+        public async Task<IEnumerable<Comment>> GetAllCommentsAsync()
         {
-            var iterator = _commentsContainer.GetItemLinqQueryable<Comment>(true);
+            var allComments = new List<Comment>();
+            using var setIterator = _commentsContainer.GetItemLinqQueryable<Comment>().ToFeedIterator();
+            while (setIterator.HasMoreResults)
+            {
+                foreach (var comment in await setIterator.ReadNextAsync())
+                {
+                    allComments.Add(comment);
+                }
+            }
 
-            return Task.FromResult<IEnumerable<Comment>>(iterator.ToList());
+            return allComments;
         }
 
         public async Task<Comment> GetCommentByIdAsync(string id)
@@ -43,6 +51,7 @@ namespace Kainos.Comments.Application.Cosmos
             }
             catch (CosmosException ce) when (ce.StatusCode == HttpStatusCode.NotFound)
             {
+                _log.LogError(ce.Message);
                 return null;
             }
         }
@@ -73,7 +82,8 @@ namespace Kainos.Comments.Application.Cosmos
                     Id = id,
                     Author = commentResource.Author,
                     Text = comment.Text,
-                    CreationDate = DateTime.UtcNow
+                    CreationDate = commentResource.CreationDate,
+                    IsCensored = comment.IsCensored
                 };
 
                 var response = await _commentsContainer.ReplaceItemAsync<Comment>(updatedComment, id, new PartitionKey(id));
@@ -85,16 +95,26 @@ namespace Kainos.Comments.Application.Cosmos
             }
         }
 
+        public async Task<IEnumerable<BlackListItem>> GetAllBadWordsAsync()
+        {
+            var badWords = new List<BlackListItem>();
+
+            using var setIterator = _blackListContainer.GetItemLinqQueryable<BlackListItem>().ToFeedIterator();
+            
+            while (setIterator.HasMoreResults)
+            {
+                foreach (var word in await setIterator.ReadNextAsync())
+                { 
+                    badWords.Add(word);
+                }
+            }
+            
+            return badWords;
+        }
+
         public async Task DeleteCommentByIdAsync(string id)
         {
             await _commentsContainer.DeleteItemAsync<Comment>(id, new PartitionKey(id));
-        }
-
-        public Task<IEnumerable<BlackListItem>> GetAllBadWords()
-        {
-            var iterator = _blackListContainer.GetItemLinqQueryable<BlackListItem>(true);
-
-            return Task.FromResult<IEnumerable<BlackListItem>>(iterator.ToList());
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +27,7 @@ namespace Kainos.Comments.Application.Services
             IEnumerable<Comment> comments;
             try
             {
-                comments = await _cosmosDb.GetAllComments();
+                comments = await _cosmosDb.GetAllCommentsAsync();
             }
             catch (Exception e)
             {

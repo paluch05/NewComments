@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model.Database;

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model.Database;
@@ -25,13 +20,12 @@ namespace Kainos.Comments.Application.Services
         }
         public async Task ExecuteAsync(Comment comment)
         {
-            var blackList = _cosmosDbService.GetAllBadWords().Result.Select(r => r.StopWord).ToList();
+            var blackList = await _cosmosDbService.GetAllBadWordsAsync();
             
             foreach (var fWord in blackList)
             {
-                comment.Text = comment.Text.Replace(fWord, CensorWord(fWord.Length));
+                comment.Text = comment.Text.Replace(fWord.StopWord, CensorWord(fWord.StopWord.Length), StringComparison.CurrentCultureIgnoreCase);
             }
-
             comment.IsCensored = true;
 
            await _cosmosDbService.UpdateCommentByIdAsync(comment.Id, comment);
@@ -40,6 +34,9 @@ namespace Kainos.Comments.Application.Services
         public static string CensorWord(int len)
         {
             return new string('*', len);
+
+            // TDD, najpierw napisac test jakbym chciala zeby metoda dzialala,
+            // caps, sprowadzic do jednej wielkosci poprobowac TDD i testami dojsc jak uzyskac efekt not caseSensitive
         }
     }
 }

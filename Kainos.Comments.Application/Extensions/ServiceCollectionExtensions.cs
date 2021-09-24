@@ -1,7 +1,6 @@
 ﻿using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model;
-using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,3 +42,6 @@ namespace Kainos.Comments.Application.Extensions
 // extensions doczytac
 // dlaczego this jest tutaj, dlaczego jest static i jak dziala
 // SCOPE
+
+
+// testy, kolejka comments, jak tworze, zwracam obiekt niepotrzebnie

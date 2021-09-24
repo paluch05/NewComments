@@ -7,7 +7,7 @@ namespace Kainos.Comments.Application.Cosmos
 {
     public interface ICosmosDbService
     {
-        Task<IEnumerable<Comment>> GetAllComments();
+        Task<IEnumerable<Comment>> GetAllCommentsAsync();
 
         Task<Comment> GetCommentByIdAsync(string id);
 
@@ -17,6 +17,6 @@ namespace Kainos.Comments.Application.Cosmos
 
         Task DeleteCommentByIdAsync(string id);
 
-        public Task<IEnumerable<BlackListItem>> GetAllBadWords();
+        public Task<IEnumerable<BlackListItem>> GetAllBadWordsAsync();
     }
 }
