@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model.Database;
@@ -37,6 +38,7 @@ namespace Kainos.Comments.Application.Services
 
             // TDD, najpierw napisac test jakbym chciala zeby metoda dzialala,
             // caps, sprowadzic do jednej wielkosci poprobowac TDD i testami dojsc jak uzyskac efekt not caseSensitive
+            // uchronic przed wstrzykiwaniem skryptow, cross site scripting (?), ochrona funkcji przed atakami np <> i ustalic regexem
         }
     }
 }

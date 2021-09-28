@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kainos.Comments.Functions", "Kainos.Comments.Functions\Kainos.Comments.Functions.csproj", "{514F4FBD-17A4-4448-A459-51ABEA695B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kainos.Comments.Functions", "Kainos.Comments.Functions\Kainos.Comments.Functions.csproj", "{514F4FBD-17A4-4448-A459-51ABEA695B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kainos.Comments.Application", "Kainos.Comments.Application\Kainos.Comments.Application.csproj", "{6AD72AF8-1D51-48FA-9DAB-3DA7CA7B2435}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kainos.Comments.Application", "Kainos.Comments.Application\Kainos.Comments.Application.csproj", "{6AD72AF8-1D51-48FA-9DAB-3DA7CA7B2435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{AD9CF3B8-910B-43F4-9C30-E72E02F14F06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6AD72AF8-1D51-48FA-9DAB-3DA7CA7B2435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AD72AF8-1D51-48FA-9DAB-3DA7CA7B2435}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AD72AF8-1D51-48FA-9DAB-3DA7CA7B2435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD9CF3B8-910B-43F4-9C30-E72E02F14F06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD9CF3B8-910B-43F4-9C30-E72E02F14F06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD9CF3B8-910B-43F4-9C30-E72E02F14F06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD9CF3B8-910B-43F4-9C30-E72E02F14F06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

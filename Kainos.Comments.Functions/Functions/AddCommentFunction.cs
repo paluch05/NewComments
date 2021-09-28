@@ -59,7 +59,7 @@ namespace Kainos.Comments.Functions.Functions
 
                 return new BadRequestObjectResult(new { reason = validationResult.ToString() });
             }
-            // try catch
+
             var addCommentResponse = await _repository.ExecuteAsync(addCommentRequest);
 
             if (addCommentResponse == null)

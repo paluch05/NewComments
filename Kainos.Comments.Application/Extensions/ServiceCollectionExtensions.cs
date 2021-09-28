@@ -29,7 +29,7 @@ namespace Kainos.Comments.Application.Extensions
             });
            
             services.AddTransient<IExecutable<AddCommentRequest, AddCommentResponse>, AddCommentService>();
-            //services.AddTransient<IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>, DeleteCommentByIdService>();
+            services.AddTransient<IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>, DeleteCommentByIdService>();
             services.AddTransient<IExecutable<GetAllCommentsRequest, GetAllCommentsResponse>, GetAllCommentsService>();
             services.AddTransient<IExecutable<UpdateCommentRequest, UpdateCommentResponse>, UpdateCommentByIdService>();
             services.AddTransient<ICosmosExecutable, CensorCommentService>();

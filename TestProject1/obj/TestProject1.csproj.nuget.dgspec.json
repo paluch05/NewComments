@@ -1,0 +1,253 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\4743\\source\\repos\\NewComments\\TestProject1\\TestProject1.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj",
+        "projectName": "Kainos.Comments.Application",
+        "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj",
+        "packagesPath": "C:\\Users\\4743\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\4743\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://digitalartifactory.int-newdaycards.com/artifactory/api/nuget/newday-digital-library": {},
+          "https://nuget.pkg.github.com/newdaycards/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.Azure.Cosmos": {
+              "target": "Package",
+              "version": "[3.20.1, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[3.1.19, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[3.1.18, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\Kainos.Comments.Functions.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\Kainos.Comments.Functions.csproj",
+        "projectName": "Kainos.Comments.Functions",
+        "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\Kainos.Comments.Functions.csproj",
+        "packagesPath": "C:\\Users\\4743\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\4743\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://digitalartifactory.int-newdaycards.com/artifactory/api/nuget/newday-digital-library": {},
+          "https://nuget.pkg.github.com/newdaycards/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj": {
+                "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[10.3.3, )"
+            },
+            "Microsoft.Azure.Functions.Extensions": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Microsoft.Azure.WebJobs.Extensions.CosmosDB": {
+              "target": "Package",
+              "version": "[3.0.10, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Microsoft.NET.Sdk.Functions": {
+              "target": "Package",
+              "version": "[3.0.13, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\4743\\source\\repos\\NewComments\\TestProject1\\TestProject1.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\4743\\source\\repos\\NewComments\\TestProject1\\TestProject1.csproj",
+        "projectName": "TestProject1",
+        "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\TestProject1\\TestProject1.csproj",
+        "packagesPath": "C:\\Users\\4743\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\4743\\source\\repos\\NewComments\\TestProject1\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\4743\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://digitalartifactory.int-newdaycards.com/artifactory/api/nuget/newday-digital-library": {},
+          "https://nuget.pkg.github.com/newdaycards/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj": {
+                "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Application\\Kainos.Comments.Application.csproj"
+              },
+              "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\Kainos.Comments.Functions.csproj": {
+                "projectPath": "C:\\Users\\4743\\source\\repos\\NewComments\\Kainos.Comments.Functions\\Kainos.Comments.Functions.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoFixture": {
+              "target": "Package",
+              "version": "[4.17.0, )"
+            },
+            "AutoFixture.AutoMoq": {
+              "target": "Package",
+              "version": "[4.17.0, )"
+            },
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
