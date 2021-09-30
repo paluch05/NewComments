@@ -103,10 +103,7 @@ namespace Kainos.Comments.Application.Cosmos
             
             while (setIterator.HasMoreResults)
             {
-                foreach (var word in await setIterator.ReadNextAsync())
-                { 
-                    badWords.Add(word);
-                }
+                badWords.AddRange(await setIterator.ReadNextAsync());
             }
             
             return badWords;

@@ -46,7 +46,7 @@ namespace Kainos.Comments.Functions.Functions
 
                 return new BadRequestObjectResult(new
                 {
-                    reason = "Your Json format is incorrect."
+                    reason = e.Message
                 });
             }
 

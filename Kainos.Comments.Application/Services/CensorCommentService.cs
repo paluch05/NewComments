@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model.Database;

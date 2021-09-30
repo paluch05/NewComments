@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ApplicationTests\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Kainos.Comments.Application\Kainos.Comments.Application.csproj" />
     <ProjectReference Include="..\Kainos.Comments.Functions\Kainos.Comments.Functions.csproj" />
   </ItemGroup>

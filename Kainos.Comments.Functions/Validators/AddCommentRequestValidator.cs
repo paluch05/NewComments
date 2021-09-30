@@ -7,12 +7,12 @@ namespace Kainos.Comments.Functions.Validators
     {
         public AddCommentRequestValidator()
         {
-            RuleFor(x => x.Text).MaximumLength(200);
-            RuleFor(x => x.Text).NotNull();
-            RuleFor(x => x.Text).NotEmpty();
-            RuleFor(x => x.Author).MaximumLength(50);
-            RuleFor(x => x.Author).NotNull();
-            RuleFor(x => x.Author).NotEmpty();
+            RuleFor(x => x.Text).MaximumLength(200)
+                .NotNull()
+                .NotEmpty();
+            RuleFor(x => x.Author).MaximumLength(50)
+                .NotNull()
+                .NotEmpty();
         }
     }
 }

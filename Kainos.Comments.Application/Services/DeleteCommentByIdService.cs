@@ -34,7 +34,7 @@ namespace Kainos.Comments.Application.Services
 
                 return new DeleteCommentByIdResponse
                 {
-                    Message = $"File with given id: {request.Id} was not found"
+                    Message = e.Message
                 };
             }
 
