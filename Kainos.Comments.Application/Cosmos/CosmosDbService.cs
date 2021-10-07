@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Model.Database;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -19,7 +18,7 @@ namespace Kainos.Comments.Application.Cosmos
 
         public CosmosDbService(
             CosmosClient cosmosClient, 
-            IOptions<CosmosDbConfiguration> cosmosDbConfiguration,
+            IOptions<Configuration.Configuration> cosmosDbConfiguration,
             ILogger<CosmosDbService> log)
         {
             _commentsContainer = cosmosClient.GetContainer(cosmosDbConfiguration.Value.DatabaseName, cosmosDbConfiguration.Value.CommentContainerName);
@@ -33,10 +32,7 @@ namespace Kainos.Comments.Application.Cosmos
             using var setIterator = _commentsContainer.GetItemLinqQueryable<Comment>().ToFeedIterator();
             while (setIterator.HasMoreResults)
             {
-                foreach (var comment in await setIterator.ReadNextAsync())
-                {
-                    allComments.Add(comment);
-                }
+                allComments.AddRange(await setIterator.ReadNextAsync());
             }
 
             return allComments;

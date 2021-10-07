@@ -42,9 +42,17 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Azure.Storage.Queues": {
+              "target": "Package",
+              "version": "[12.8.0, )"
+            },
             "Microsoft.Azure.Cosmos": {
               "target": "Package",
               "version": "[3.20.1, )"
+            },
+            "Microsoft.Azure.WebJobs.Extensions.Storage": {
+              "target": "Package",
+              "version": "[4.0.5, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
@@ -52,7 +60,7 @@
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",
-              "version": "[3.1.18, )"
+              "version": "[3.1.13, )"
             }
           },
           "imports": [
@@ -116,6 +124,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Azure.Storage.Queues": {
+              "target": "Package",
+              "version": "[12.8.0, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[10.3.3, )"

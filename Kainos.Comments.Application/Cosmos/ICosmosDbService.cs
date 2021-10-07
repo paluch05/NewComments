@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Database;
 
 namespace Kainos.Comments.Application.Cosmos

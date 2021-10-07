@@ -179,3 +179,12 @@ C:\Users\4743\source\repos\NewComments\TestProject1\obj\Debug\netcoreapp3.1\Test
 C:\Users\4743\source\repos\NewComments\TestProject1\obj\Debug\netcoreapp3.1\TestProject1.dll
 C:\Users\4743\source\repos\NewComments\TestProject1\obj\Debug\netcoreapp3.1\TestProject1.pdb
 C:\Users\4743\source\repos\NewComments\TestProject1\obj\Debug\netcoreapp3.1\TestProject1.genruntimeconfig.cache
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.Cosmos.Table.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.KeyVault.Core.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Blob.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Common.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.Storage.Queue.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Azure.WebJobs.Extensions.Storage.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.OData.Core.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.OData.Edm.dll
+C:\Users\4743\source\repos\NewComments\TestProject1\bin\Debug\netcoreapp3.1\Microsoft.Spatial.dll

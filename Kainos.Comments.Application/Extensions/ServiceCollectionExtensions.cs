@@ -1,39 +1,42 @@
-﻿using Kainos.Comments.Application.Configuration;
+﻿using Azure.Storage.Queues;
+using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Domain;
+using Kainos.Comments.Application.Queue;
 using Kainos.Comments.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
+using Microsoft.Azure.Storage.Queue;
 
 namespace Kainos.Comments.Application.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddApplication(this IServiceCollection services, CosmosDbConfiguration cosmosDbConfiguration)
+        public static void AddApplication(this IServiceCollection services, Configuration.Configuration cosmosDbConfiguration,
+                                            Configuration.Configuration queueConfiguration)
         {
-
-            // services.AddTransient<Container>(provider =>
-            // {
-            //     var cosmosClientBuilder = new CosmosClientBuilder(cosmosDbConfiguration.CosmosDbConnectionString);
-            //     var cosmosClient = cosmosClientBuilder.Build();
-            //
-            //     return cosmosClient.GetContainer(cosmosDbConfiguration.DatabaseName, cosmosDbConfiguration.CommentContainerName);
-            // });
-
-            services.AddTransient<CosmosClient>(provider =>
+            services.AddSingleton<CosmosClient>(provider =>
             {
                 var cosmosClientBuilder = new CosmosClientBuilder(cosmosDbConfiguration.CosmosDbConnectionString);
                 return cosmosClientBuilder.Build();
             });
-           
+
+            services.AddSingleton<QueueClient>(new QueueClient(queueConfiguration.QueueConnectionString, queueConfiguration.QueueName));
+
             services.AddTransient<IExecutable<AddCommentRequest, AddCommentResponse>, AddCommentService>();
             services.AddTransient<IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>, DeleteCommentByIdService>();
             services.AddTransient<IExecutable<GetAllCommentsRequest, GetAllCommentsResponse>, GetAllCommentsService>();
             services.AddTransient<IExecutable<UpdateCommentRequest, UpdateCommentResponse>, UpdateCommentByIdService>();
             services.AddTransient<ICosmosExecutable, CensorCommentService>();
             services.AddTransient<ICosmosDbService, CosmosDbService>();
+            services.AddTransient<IQueueService, QueueService>();
+            services.Configure<Configuration.Configuration>(c =>
+            {
+                c.QueueConnectionString = queueConfiguration.QueueConnectionString;
+                c.QueueName = queueConfiguration.QueueName;
+            });
 
         }
     }

@@ -2,12 +2,10 @@
 {
     public static class Routes
     {
-        public const string Delete = "Comment/{id}";
-        public const string Update = "Comment/{id}";
-        public const string GetOne = "Comment/{id}";
-        public const string Add = "Comment";
         public const string Get = "Comments";
-
-        //poczytac o dobrych praktykach restful
+        public const string Add = "Comments";
+        public const string Delete = "Comments/{id}";
+        public const string Update = "Comments/{id}";
+        public const string GetOne = "Comments/{id}";
     }
 }
