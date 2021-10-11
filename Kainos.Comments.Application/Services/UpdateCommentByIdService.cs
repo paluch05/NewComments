@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
+using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Application.Model.Domain;
 using Microsoft.Extensions.Logging;
@@ -34,9 +35,9 @@ namespace Kainos.Comments.Application.Services
             {
                 await _cosmosDb.UpdateCommentByIdAsync(request.Id, updateComment);
             }
-            catch (Exception e)
+            catch (UpdateCommentByIdException uce)
             {
-                _log.LogError(e.Message);
+                _log.LogError(uce.Message);
                 throw;
             }
 

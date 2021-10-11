@@ -37,7 +37,7 @@ namespace Kainos.Comments.Application.Services
 
             if (addedComment == null)
             {
-                return null; // kolejna 500
+                return null;
             }
 
             _log.LogInformation("Comment successfully created.");

@@ -39,14 +39,14 @@ namespace Kainos.Comments.Functions.Functions
                      JsonConvert.DeserializeObject<AddCommentRequest>(
                          requestBody);
             }
-            catch (Exception e)
+            catch (JsonSerializationException jse)
             {
-                log.LogError(e, e.Message);
+                log.LogError(jse, jse.Message);
                 log.LogError("Your Json format is incorrect.");
 
                 return new BadRequestObjectResult(new
                 {
-                    reason = e.Message
+                    reason = jse.Message
                 });
             }
 
@@ -64,7 +64,7 @@ namespace Kainos.Comments.Functions.Functions
 
             if (addCommentResponse == null)
             {
-                return new InternalServerErrorResult(); // 500, ale z wiad
+                return new InternalServerErrorResult();
             }
 
             return new OkObjectResult(addCommentResponse);

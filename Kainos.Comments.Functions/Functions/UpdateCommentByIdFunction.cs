@@ -41,13 +41,13 @@ namespace Kainos.Comments.Functions.Functions
                     JsonConvert.DeserializeObject<UpdateCommentRequest>(
                         requestBody);
             }
-            catch (Exception e)
+            catch (JsonSerializationException jse)
             {
-                log.LogError(e, e.Message);
+                log.LogError(jse, jse.Message);
                 log.LogError("Your JSON format is incorrect");
 
                 return new BadRequestObjectResult(new
-                { reason = e.Message });
+                { reason = jse.Message });
             }
 
             updateCommentRequest.Id = id;

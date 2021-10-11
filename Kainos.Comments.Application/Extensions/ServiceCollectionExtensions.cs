@@ -42,9 +42,3 @@ namespace Kainos.Comments.Application.Extensions
     }
 }
 
-// extensions doczytac
-// dlaczego this jest tutaj, dlaczego jest static i jak dziala
-// SCOPE
-
-
-// testy, kolejka comments, jak tworze, zwracam obiekt niepotrzebnie

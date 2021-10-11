@@ -1,8 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=277e8048_002Db531_002D4c4c_002Dac5f_002Da5d8e306f77d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ExecuteAsync_ShouldAddComment #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.AddCommentServiceTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="C:\Users\4743\source\repos\NewComments\TestProject1" Presentation="&amp;lt;TestProject1&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7ad3bc40_002Db6a2_002D46fc_002D940b_002D8ce1cb1b13d9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ExecuteAsync_ShouldAddComment" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;

@@ -14,13 +14,6 @@ namespace Kainos.Comments.Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            // JsonConvert.DefaultSettings = () =>
-            //     new JsonSerializerSettings
-            //     {
-            //         Formatting = Formatting.Indented,
-            //         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //     };
-
             var cosmosDbConfiguration = GetCosmosDbConfiguration();
             var queueConfiguration = GetQueueConfiguration();
 

@@ -59,9 +59,9 @@ namespace Kainos.Comments.Application.Cosmos
                var response = await _commentsContainer.CreateItemAsync<Comment>(comment);
                 return response.Resource;
             }
-            catch (Exception e)
+            catch (CosmosException ce)
             {
-                _log.LogError(e, e.Message);
+                _log.LogError(ce.Message);
                 return null;
             }
         }
@@ -84,9 +84,9 @@ namespace Kainos.Comments.Application.Cosmos
 
                 var response = await _commentsContainer.ReplaceItemAsync<Comment>(updatedComment, id, new PartitionKey(id));
             }
-            catch (Exception e)
+            catch (CosmosException ce)
             {
-                _log.LogError(e.Message);
+                _log.LogError(ce.Message);
                 throw;
             }
         }
