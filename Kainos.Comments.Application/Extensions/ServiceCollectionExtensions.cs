@@ -1,5 +1,4 @@
 ﻿using Azure.Storage.Queues;
-using Kainos.Comments.Application.Configuration;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Domain;
@@ -8,7 +7,6 @@ using Kainos.Comments.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
-using Microsoft.Azure.Storage.Queue;
 
 namespace Kainos.Comments.Application.Extensions
 {

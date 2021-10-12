@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Kainos.Comments.Application.Services
 {
-    class DeleteCommentByIdService : IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>
+    public class DeleteCommentByIdService : IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>
     {
         private readonly ICosmosDbService _cosmosDb;
         private readonly ILogger<DeleteCommentByIdService> _log;

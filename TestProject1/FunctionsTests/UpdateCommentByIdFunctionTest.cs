@@ -14,7 +14,7 @@ using Xunit;
 
 namespace TestProject1.FunctionsTests
 {
-    public class UpdateCommentByIdTest
+    public class UpdateCommentByIdFunctionTest
     {
         [Fact]
         public async Task ShouldReturnOkObject_WhenServiceResponsesHappily()

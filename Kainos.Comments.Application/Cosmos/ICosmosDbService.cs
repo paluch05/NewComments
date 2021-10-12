@@ -8,8 +8,6 @@ namespace Kainos.Comments.Application.Cosmos
     {
         Task<IEnumerable<Comment>> GetAllCommentsAsync();
 
-        Task<Comment> GetCommentByIdAsync(string id);
-
         Task<Comment> AddCommentAsync(Comment comment);
 
         Task UpdateCommentByIdAsync(string id, Comment comment);

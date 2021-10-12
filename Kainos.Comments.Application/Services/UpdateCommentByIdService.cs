@@ -35,10 +35,10 @@ namespace Kainos.Comments.Application.Services
             {
                 await _cosmosDb.UpdateCommentByIdAsync(request.Id, updateComment);
             }
-            catch (UpdateCommentByIdException uce)
+            catch (Exception e)
             {
-                _log.LogError(uce.Message);
-                throw;
+                _log.LogError(e.Message);
+                throw new UpdateCommentByIdException("Unable to update a comment.");
             }
 
             return new UpdateCommentResponse

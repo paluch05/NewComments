@@ -4,11 +4,16 @@
     &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.FunctionsTests.UpdateCommentByIdTest.ShouldReturnOkObject_WhenServiceResponsesHappily&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=176559a4_002D5f6f_002D461d_002Da9bd_002Dd5905bc22ed8/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ExecuteAsync_ShouldCensorComment" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.CensorCommentServiceTest.ExecuteAsync_ShouldCensorComment&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=277e8048_002Db531_002D4c4c_002Dac5f_002Da5d8e306f77d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ExecuteAsync_ShouldAddComment #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\4743\source\repos\NewComments\TestProject1" Presentation="&amp;lt;TestProject1&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=281eba7c_002D7f02_002D4048_002Da9b1_002D2f90233d13c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldReturnOkObject_WhenServiceResponsesHappily #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=281eba7c_002D7f02_002D4048_002Da9b1_002D2f90233d13c1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldReturnOkObject_WhenServiceResponsesHappily #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="C:\Users\4743\source\repos\NewComments\TestProject1" Presentation="&amp;lt;TestProject1&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=711ac460_002D26ad_002D439c_002D945c_002D5b24b57de06d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldGetAllComments" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
@@ -30,6 +35,19 @@
     &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.FunctionsTests.UpdateCommentByIdTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.FunctionsTests.GetAllCommentsFunctionTest.ShouldReturnOkObject_WhenServiceResponsesHappily&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.FunctionsTests.GetAllCommentsFunctionTest.ShouldReturnInternalServerErrorResponse_WhenServiceThrowsException&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d3a190ec_002Dff3f_002D48b2_002Db402_002D355295e0074b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ExecuteAsync_ShouldCensorComment #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.CensorCommentServiceTest.ExecuteAsync_ShouldCensorComment&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdTest.ExecuteAsync_ShouldUpdateComment&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdTest.ExecuteAsync_ShouldThrowAnExceptionWhenUpdateFailed&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdTest.ExecuteAsync_ShouldThrowAnException_WhenUpdateFailed&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdTest.ExecuteAsync_ShouldReturnUpdateCommentResponse_WhenUpdateSucceeded&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdTest.ExecuteAsync_ShouldThrowAnException_WhenCosmosDbServiceThrowsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.FunctionsTests.UpdateCommentByIdFunctionTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.GetAllCommentsServiceTest.ExecuteAsync_ShouldThrowAnException_WhenCosmosDbServiceThrowsException&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::AD9CF3B8-910B-43F4-9C30-E72E02F14F06::.NETCoreApp,Version=v3.1::TestProject1.ApplicationTests.UpdateCommentByIdServiceTest.ExecuteAsync_ShouldThrowAnException_WhenCosmosDbServiceThrowsException&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

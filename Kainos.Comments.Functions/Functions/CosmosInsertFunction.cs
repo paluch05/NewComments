@@ -15,44 +15,30 @@ namespace Kainos.Comments.Functions.Functions
 {
     public class CosmosInsertFunction
     {
-        private readonly IQueueService _queryService;
+        private readonly IQueueService _queueService;
 
         public CosmosInsertFunction(
-           IQueueService queryService)
+           IQueueService queueService)
         {
-            _queryService = queryService;
+            _queueService = queueService;
         }
 
         [FunctionName("CosmosInsertFunction")]
-        public async Task<IActionResult> Run([CosmosDBTrigger(
+        public async Task Run([CosmosDBTrigger(
                 databaseName: "Comments",
                 collectionName: "Comments",
                 ConnectionStringSetting = "CosmosDbConnectionString",
                 CreateLeaseCollectionIfNotExists = true)]
             IReadOnlyList<Document> documents, ILogger log)
         {
-            IEnumerable<Comment> comments;
-            try
-            { 
-                comments = documents.Select(d => JsonConvert.DeserializeObject<Comment>(d.ToString()));
-            }
-            catch (CosmosInsertException cie)
-            {
-                log.LogError(cie.Message);
-                return new BadRequestObjectResult(new
-                {
-                    reason = "Unable to deserialize objects." 
-
-                });
-            }
+            var comments = documents.Select(d => JsonConvert.DeserializeObject<Comment>(d.ToString()));
+            
             var updatedComments = comments.Where(c => c.IsCensored == false);
 
             foreach (var comment in updatedComments)
             {
-                await _queryService.ExecuteAsync(comment); 
+                await _queueService.ExecuteAsync(comment);
             }
-
-            return new OkResult();
         }
     }
 }

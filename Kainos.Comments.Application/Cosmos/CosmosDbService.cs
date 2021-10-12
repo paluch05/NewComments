@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model.Database;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -38,20 +39,6 @@ namespace Kainos.Comments.Application.Cosmos
             return allComments;
         }
 
-        public async Task<Comment> GetCommentByIdAsync(string id)
-        {
-            try
-            {
-                var response = await _commentsContainer.ReadItemAsync<Comment>(id, new PartitionKey(id));
-                return response.Resource;
-            }
-            catch (CosmosException ce) when (ce.StatusCode == HttpStatusCode.NotFound)
-            {
-                _log.LogError(ce.Message);
-                return null;
-            }
-        }
-
         public async Task<Comment> AddCommentAsync(Comment comment)
         {
             try
@@ -84,10 +71,10 @@ namespace Kainos.Comments.Application.Cosmos
 
                 var response = await _commentsContainer.ReplaceItemAsync<Comment>(updatedComment, id, new PartitionKey(id));
             }
-            catch (CosmosException ce)
+            catch (Exception e)
             {
-                _log.LogError(ce.Message);
-                throw;
+                _log.LogError(e.Message);
+                throw new UpdateCommentByIdException("Unable to update a comment");
             }
         }
 

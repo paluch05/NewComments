@@ -34,6 +34,7 @@ namespace Kainos.Comments.Application.Services
             }
             catch (CensorCommentServiceException cce)
             {
+                _log.LogError(cce.Message);
                throw new CensorCommentServiceException(cce.Message);
             }
 
