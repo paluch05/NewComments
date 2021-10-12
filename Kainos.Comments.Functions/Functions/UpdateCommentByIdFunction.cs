@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    class UpdateCommentByIdFunction
+    public class UpdateCommentByIdFunction
     {
         private readonly IExecutable<UpdateCommentRequest, UpdateCommentResponse> _repository;
 
@@ -47,7 +47,7 @@ namespace Kainos.Comments.Functions.Functions
                 log.LogError("Your JSON format is incorrect");
 
                 return new BadRequestObjectResult(new
-                { reason = jse.Message });
+                { reason = "Wrong Json format." });
             }
 
             updateCommentRequest.Id = id;

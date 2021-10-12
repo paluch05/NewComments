@@ -20,17 +20,11 @@ namespace TestProject1.ApplicationTests
         [Fact]
         public async Task ExecuteAsync_ShouldAddComment()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
         
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -41,11 +35,8 @@ namespace TestProject1.ApplicationTests
                 log.Object);
 
             var addRequest = _fixture.Create<AddCommentRequest>();
-
-            var result = await add.ExecuteAsync(addRequest);
-
-            // expectedResult typu addcommentresponse i porownac result shouldBeEquivalentTo...
-            // metoda censored z Theory
+            
+            await add.ExecuteAsync(addRequest);
 
             Mock.Get(_cosmosDbServiceMock)
                 .Verify(c => c.AddCommentAsync(It.IsAny<Comment>()), Times.Once);
@@ -53,19 +44,13 @@ namespace TestProject1.ApplicationTests
             }
 
         [Fact]
-        public async Task ExecuteAsync_ShouldReturnAddCommentResponseWhenCommentWasAdded()
+        public async Task ExecuteAsync_ShouldReturnAddCommentResponse_WhenCommentWasAdded()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
-
+            var comment = _fixture.Create<Comment>();
+            
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -85,17 +70,11 @@ namespace TestProject1.ApplicationTests
         [Fact]
         public async Task ExecuteAsync_ShouldBeEquivalentToId()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -114,17 +93,11 @@ namespace TestProject1.ApplicationTests
         [Fact]
         public async Task ExecuteAsync_ShouldBeEquivalentToMessage()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -143,17 +116,11 @@ namespace TestProject1.ApplicationTests
         [Fact]
         public async Task ExecuteAsync_ResponseShouldNotBeNull()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -173,17 +140,11 @@ namespace TestProject1.ApplicationTests
         [Fact]
         public async Task ExecuteAsync_IdShouldNotBeNullOrEmpty()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -197,23 +158,17 @@ namespace TestProject1.ApplicationTests
 
             var result = await add.ExecuteAsync(addRequest);
 
-            comm.Id.Should().NotBeNullOrEmpty();
+            comment.Id.Should().NotBeNullOrEmpty();
         }
 
         [Fact]
         public async Task ExecuteAsync_AuthorShouldNotBeNullOrEmpty()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -227,23 +182,17 @@ namespace TestProject1.ApplicationTests
 
             var result = await add.ExecuteAsync(addRequest);
 
-            comm.Author.Should().NotBeNullOrEmpty();
+            comment.Author.Should().NotBeNullOrEmpty();
         }
 
         [Fact]
         public async Task ExecuteAsync_TextShouldNotBeNullOrEmpty()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -257,23 +206,17 @@ namespace TestProject1.ApplicationTests
 
             var result = await add.ExecuteAsync(addRequest);
 
-            comm.Text.Should().NotBeNullOrEmpty();
+            comment.Text.Should().NotBeNullOrEmpty();
         }
 
         [Fact]
         public async Task ExecuteAsync_ShouldBeOfTypeComment()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -287,23 +230,17 @@ namespace TestProject1.ApplicationTests
 
             var result = await add.ExecuteAsync(addRequest);
 
-            comm.Should().BeOfType<Comment>();
+            comment.Should().BeOfType<Comment>();
         }
 
         [Fact]
         public async Task ExecuteAsync_IsCensoredShouldBeTrue()
         {
-            var comm = _fixture.Build<Comment>()
-                .With(x => x.Id)
-                .With(x => x.Author)
-                .With(x => x.Text)
-                .With(x => x.CreationDate)
-                .With(x => x.IsCensored)
-                .Create();
+            var comment = _fixture.Create<Comment>();
 
             Mock.Get(_cosmosDbServiceMock)
                 .Setup(mock => mock.AddCommentAsync(It.IsAny<Comment>()))
-                .ReturnsAsync(comm)
+                .ReturnsAsync(comment)
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
@@ -317,7 +254,7 @@ namespace TestProject1.ApplicationTests
 
             var result = await add.ExecuteAsync(addRequest);
 
-            comm.IsCensored.Should().BeTrue();
+            comment.IsCensored.Should().BeTrue();
         }
     }
 }

@@ -38,9 +38,10 @@ namespace Kainos.Comments.Functions.Functions
             }
             catch (CosmosInsertException cie)
             {
+                log.LogError(cie.Message);
                 return new BadRequestObjectResult(new
                 {
-                    reason = cie.Message 
+                    reason = "Unable to deserialize objects." 
 
                 });
             }

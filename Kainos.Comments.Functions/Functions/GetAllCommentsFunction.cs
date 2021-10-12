@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Exceptions;
@@ -33,9 +34,10 @@ namespace Kainos.Comments.Functions.Functions
             {
                 getComment = await _repository.ExecuteAsync(new GetAllCommentsRequest());
             }
-            catch (GetAllCommentsFunctionException gace)
+            catch (Exception ex)
             {
-                throw new Exception(gace.Message);
+                log.LogError(ex, ex.Message);
+                return new InternalServerErrorResult();
             }
             
             log.LogInformation("List of all comments: ");

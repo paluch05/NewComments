@@ -2,9 +2,9 @@
 
 namespace Kainos.Comments.Application.Exceptions
 {
-    class GetAllCommentsException : Exception
+    public class GetAllCommentsException : Exception
     {
-        public GetAllCommentsException(string message, Exception? innerException) : base(message, innerException)
+        public GetAllCommentsException(string message) : base(message)
         {
         }
     }

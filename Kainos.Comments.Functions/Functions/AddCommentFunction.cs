@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    class AddCommentFunction
+    public class AddCommentFunction
     {
         private readonly IExecutable<AddCommentRequest, AddCommentResponse> _repository;
 
@@ -35,39 +35,37 @@ namespace Kainos.Comments.Functions.Functions
 
             try
             {
-                addCommentRequest =
-                     JsonConvert.DeserializeObject<AddCommentRequest>(
-                         requestBody);
+                addCommentRequest = JsonConvert.DeserializeObject<AddCommentRequest>(requestBody);
             }
             catch (JsonSerializationException jse)
             {
-                log.LogError(jse, jse.Message);
+                log.LogError(jse.Message);
                 log.LogError("Your Json format is incorrect.");
 
-                return new BadRequestObjectResult(new
+                return new BadRequestObjectResult( new { reason = "Wrong Json format." });
+            }
+
+            try
+            {
+                var addCommentRequestValidator = new AddCommentRequestValidator();
+                var validationResult = await addCommentRequestValidator.ValidateAsync(addCommentRequest);
+
+                if (!validationResult.IsValid)
                 {
-                    reason = jse.Message
-                });
+                    log.LogError(validationResult.ToString());
+
+                    return new BadRequestObjectResult(new {reason = validationResult.ToString()});
+                }
+
+                var addCommentResponse = await _repository.ExecuteAsync(addCommentRequest);
+
+                return new OkObjectResult(addCommentResponse);
             }
-
-            var addCommentRequestValidator = new AddCommentRequestValidator();
-            var validationResult = await addCommentRequestValidator.ValidateAsync(addCommentRequest);
-
-            if (!validationResult.IsValid)
+            catch (Exception ex)
             {
-                log.LogError(validationResult.ToString());
-
-                return new BadRequestObjectResult(new { reason = validationResult.ToString() });
-            }
-
-            var addCommentResponse = await _repository.ExecuteAsync(addCommentRequest);
-
-            if (addCommentResponse == null)
-            {
+                log.LogError(ex, ex.Message);
                 return new InternalServerErrorResult();
             }
-
-            return new OkObjectResult(addCommentResponse);
         }
     }
 }

@@ -3,7 +3,7 @@ using Kainos.Comments.Application.Model;
 
 namespace Kainos.Comments.Functions.Validators
 {
-    class AddCommentRequestValidator : AbstractValidator<AddCommentRequest>
+    public class AddCommentRequestValidator : AbstractValidator<AddCommentRequest>
     {
         public AddCommentRequestValidator()
         {

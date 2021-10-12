@@ -10,9 +10,11 @@ namespace Kainos.Comments.Functions.Validators
         {
             RuleFor(x => x.Text).MaximumLength(200)
                 .NotEmpty()
+                .NotNull();
+            RuleFor(x => x.Id).NotEmpty()
                 .NotNull()
                 .Matches(
-                    new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$"));
+                        new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$"));
         }
     }
 }

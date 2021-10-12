@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
-using Azure.Storage.Queues;
 using Kainos.Comments.Application;
 using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Functions.Exceptions;
-using Microsoft.Azure.Documents;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Kainos.Comments.Functions.Functions
 {

@@ -32,7 +32,8 @@ namespace Kainos.Comments.Application.Services
             }
             catch (Exception e)
             {
-                throw new GetAllCommentsException("Unable to get all comments.", e);
+                _log.LogError(e.Message);
+                throw new GetAllCommentsException("Unable to get all comments.");
             }
 
             return new GetAllCommentsResponse
