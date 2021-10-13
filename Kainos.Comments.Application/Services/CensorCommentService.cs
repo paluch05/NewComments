@@ -32,10 +32,10 @@ namespace Kainos.Comments.Application.Services
 
                 comment.IsCensored = true;
             }
-            catch (CensorCommentServiceException cce)
+            catch (Exception e)
             {
-                _log.LogError(cce.Message);
-               throw new CensorCommentServiceException(cce.Message);
+                _log.LogError(e.Message);
+               throw new CensorCommentServiceException("Unable to censor comment");
             }
 
             await _cosmosDbService.UpdateCommentByIdAsync(comment.Id, comment);
