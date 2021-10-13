@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
@@ -65,7 +63,9 @@ namespace TestProject1.ApplicationTests
         public async Task ExecuteAsync_ShouldThrowAnException_WhenCosmosDbServiceThrowsException()
         {
             var cosmosDbServiceMock = new Mock<ICosmosDbService>();
-            cosmosDbServiceMock.Setup(_ => _.UpdateCommentByIdAsync(It.IsAny<Guid>().ToString(), It.IsAny<Comment>())).Throws<Exception>();
+            cosmosDbServiceMock
+                .Setup(_ => _.UpdateCommentByIdAsync(It.IsAny<string>(), It.IsAny<Comment>()))
+                .Throws<Exception>();
 
             var log = new Mock<ILogger<UpdateCommentByIdService>>();
 
@@ -74,9 +74,8 @@ namespace TestProject1.ApplicationTests
                 log.Object);
 
             var updateRequest = _fixture.Create<UpdateCommentRequest>();
-            var result = await update.ExecuteAsync(updateRequest);
-            result.Should().BeOfType<UpdateCommentByIdException>();
-            // await func.Should().ThrowAsync<UpdateCommentByIdException>();
+            Func<Task<UpdateCommentResponse>> func = async () => await update.ExecuteAsync(updateRequest);
+            await func.Should().ThrowAsync<UpdateCommentByIdException>();
         }
     }
 }

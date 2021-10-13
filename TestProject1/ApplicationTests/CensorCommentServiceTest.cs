@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoFixture;
 using AutoFixture.AutoMoq;
@@ -36,9 +32,9 @@ namespace TestProject1.ApplicationTests
                 .With(x => x.CreationDate)
                 .With(x => x.IsCensored, false)
                 .Create();
-
+            var blackList = _fixture.Create<List<BlackListItem>>();
             var cosmosServiceMock = new Mock<ICosmosDbService>();
-            cosmosServiceMock.Setup(_ => _.GetAllBadWordsAsync());
+            cosmosServiceMock.Setup(_ => _.GetAllBadWordsAsync()).ReturnsAsync(blackList);
         
             var log = new Mock<ILogger<CensorCommentService>>();
         
