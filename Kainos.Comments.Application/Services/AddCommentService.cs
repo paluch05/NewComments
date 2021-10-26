@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
+using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Database;
 using Microsoft.Extensions.Logging;
@@ -37,7 +38,8 @@ namespace Kainos.Comments.Application.Services
 
             if (addedComment == null)
             {
-                throw new Exception("Please try again later");
+                _log.LogError("Unable to connect, please try again later.");
+                throw new CosmosDbException("Please try again later.");
             }
 
             _log.LogInformation("Comment successfully created.");

@@ -5,6 +5,7 @@ using FluentAssertions;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Functions;
+using Kainos.Comments.Functions.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
@@ -24,7 +25,8 @@ namespace TestProject1.FunctionsTests
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<UpdateCommentRequest>()))
                 .ReturnsAsync(updateCommentResponse);
 
-            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object);
+            var updateValidator = new UpdateCommentRequestValidator();
+            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object, updateValidator);
 
             var request = new UpdateCommentRequest
             {
@@ -48,7 +50,8 @@ namespace TestProject1.FunctionsTests
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<UpdateCommentRequest>()))
                 .Throws<Exception>();
 
-            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object);
+            var updateValidator = new UpdateCommentRequestValidator();
+            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object, updateValidator);
 
             var request = new UpdateCommentRequest
             {
@@ -76,8 +79,8 @@ namespace TestProject1.FunctionsTests
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<UpdateCommentRequest>()))
                 .Throws<Exception>();
 
-            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object);
-
+            var updateValidator = new UpdateCommentRequestValidator();
+            var endpoint = new UpdateCommentByIdFunction(serviceMock.Object, updateValidator);
             var request = JsonConvert.SerializeObject(json);
 
             var requestMock = HttpRequestHelper.CreateMockRequest(request);

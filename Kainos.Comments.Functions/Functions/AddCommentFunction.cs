@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using FluentValidation;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Validators;
@@ -17,11 +18,14 @@ namespace Kainos.Comments.Functions.Functions
     public class AddCommentFunction
     {
         private readonly IExecutable<AddCommentRequest, AddCommentResponse> _repository;
+        private readonly IValidator<AddCommentRequest> _validator;
 
         public AddCommentFunction(
-            IExecutable<AddCommentRequest, AddCommentResponse> repository)
+            IExecutable<AddCommentRequest, AddCommentResponse> repository,
+            IValidator<AddCommentRequest> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
         [FunctionName(nameof(AddCommentAsync))]
@@ -30,6 +34,8 @@ namespace Kainos.Comments.Functions.Functions
                 Route = Routes.Add)]
             HttpRequest req, ILogger log)
         {
+            log.LogInformation("Creating a comment");
+
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             AddCommentRequest addCommentRequest;
 
@@ -40,15 +46,13 @@ namespace Kainos.Comments.Functions.Functions
             catch (JsonSerializationException jse)
             {
                 log.LogError(jse.Message);
-                log.LogError("Your Json format is incorrect.");
 
                 return new BadRequestObjectResult( new { reason = "Wrong Json format." });
             }
 
             try
             {
-                var addCommentRequestValidator = new AddCommentRequestValidator();
-                var validationResult = await addCommentRequestValidator.ValidateAsync(addCommentRequest);
+                var validationResult = await _validator.ValidateAsync(addCommentRequest);
 
                 if (!validationResult.IsValid)
                 {

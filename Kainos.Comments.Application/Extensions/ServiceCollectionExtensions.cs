@@ -1,9 +1,11 @@
 ﻿using Azure.Storage.Queues;
+using FluentValidation;
 using Kainos.Comments.Application.Cosmos;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Queue;
 using Kainos.Comments.Application.Services;
+using Kainos.Comments.Functions.Validators;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Fluent;
@@ -21,7 +23,16 @@ namespace Kainos.Comments.Application.Extensions
                 return cosmosClientBuilder.Build();
             });
 
-            services.AddSingleton<QueueClient>(new QueueClient(queueConfiguration.QueueConnectionString, queueConfiguration.QueueName));
+            services.AddSingleton<QueueClient>(new QueueClient(queueConfiguration.QueueConnectionString, queueConfiguration.QueueName, 
+                new QueueClientOptions
+                {
+                    MessageEncoding = QueueMessageEncoding.Base64
+                }));
+
+            // services.AddSingleton<QueueClient>(provider =>
+            // {
+            //     var queueClient = new QueueClient(queueConfiguration.QueueConnectionString, queueConfiguration.QueueName, new QueueClientOptions)
+            // });
 
             services.AddTransient<IExecutable<AddCommentRequest, AddCommentResponse>, AddCommentService>();
             services.AddTransient<IExecutable<DeleteCommentByIdRequest, DeleteCommentByIdResponse>, DeleteCommentByIdService>();
@@ -35,6 +46,8 @@ namespace Kainos.Comments.Application.Extensions
                 c.QueueConnectionString = queueConfiguration.QueueConnectionString;
                 c.QueueName = queueConfiguration.QueueName;
             });
+            services.AddTransient<IValidator<AddCommentRequest>, AddCommentRequestValidator>();
+            services.AddTransient<IValidator<UpdateCommentRequest>, UpdateCommentRequestValidator>();
 
         }
     }

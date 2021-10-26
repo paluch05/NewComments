@@ -30,13 +30,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
             
-            await getAll.ExecuteAsync(getAllRequest);
+            await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             Mock.Get(cosmosDbServiceMock.Object)
                 .Verify(c => c.GetAllCommentsAsync(), Times.Once);
@@ -52,13 +52,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
 
-            var result = await getAll.ExecuteAsync(getAllRequest);
+            var result = await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             result.Should().BeOfType<GetAllCommentsResponse>();
 
@@ -72,13 +72,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
 
-            Func<Task<GetAllCommentsResponse>> func = async () => await getAll.ExecuteAsync(getAllRequest);
+            Func<Task<GetAllCommentsResponse>> func = async () => await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             await func.Should().ThrowAsync<GetAllCommentsException>();
         }
@@ -92,13 +92,13 @@ namespace TestProject1.ApplicationTests
             
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
 
-            var response = await getAll.ExecuteAsync(getAllRequest);
+            var response = await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             response.Should().BeOfType<GetAllCommentsResponse>();
         }
@@ -113,13 +113,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
 
-            await getAll.ExecuteAsync(getAllRequest);
+            await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             allComments.Should().BeOfType<List<Comment>>();
         }
@@ -134,13 +134,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<GetAllCommentsService>>();
 
-            var getAll = new GetAllCommentsService(
+            var getAllCommentsService = new GetAllCommentsService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var getAllRequest = _fixture.Create<GetAllCommentsRequest>();
 
-            var response = await getAll.ExecuteAsync(getAllRequest);
+            var response = await getAllCommentsService.ExecuteAsync(getAllRequest);
 
             response.Should().NotBeNull();
         }

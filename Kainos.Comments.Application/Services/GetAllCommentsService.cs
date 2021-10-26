@@ -25,6 +25,7 @@ namespace Kainos.Comments.Application.Services
 
         public async Task<GetAllCommentsResponse> ExecuteAsync(GetAllCommentsRequest request)
         {
+            _log.LogInformation("Getting all comments");
             IEnumerable<Comment> comments;
             try
             {
@@ -36,6 +37,7 @@ namespace Kainos.Comments.Application.Services
                 throw new GetAllCommentsException("Unable to get all comments.");
             }
 
+            _log.LogInformation("List of all comments:");
             return new GetAllCommentsResponse
             {
                 AllComments = comments.ToList()

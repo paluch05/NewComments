@@ -42,11 +42,11 @@ namespace TestProject1.ApplicationTests
         
             var log = new Mock<ILogger<CensorCommentService>>();
         
-            var getAllBadWords = new CensorCommentService(
+            var censorCommentService = new CensorCommentService(
                 cosmosServiceMock.Object,
                 log.Object);
         
-            await getAllBadWords.ExecuteAsync(badComment);
+            await censorCommentService.ExecuteAsync(badComment);
         
             Mock.Get(cosmosServiceMock.Object)
                 .Verify(b => b.GetAllBadWordsAsync());
@@ -75,11 +75,11 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<CensorCommentService>>();
 
-            var getAllBadWords = new CensorCommentService(
+            var censorCommentService = new CensorCommentService(
                 cosmosServiceMock.Object,
                 log.Object);
 
-            Func<Task> func = async () => await getAllBadWords.ExecuteAsync(null);
+            Func<Task> func = async () => await censorCommentService.ExecuteAsync(null);
 
             await func.Should().ThrowAsync<Exception>();
         }

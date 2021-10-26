@@ -1,5 +1,4 @@
-﻿
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Kainos.Comments.Application;
 using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Functions.Exceptions;
@@ -8,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    public class QueueFunction
+    public class CensorFunction
     {
         private readonly ICosmosExecutable _cosmosExecutable;
 
-        public QueueFunction(ICosmosExecutable cosmosExecutable)
+        public CensorFunction(ICosmosExecutable cosmosExecutable)
         {
             _cosmosExecutable = cosmosExecutable;
         }

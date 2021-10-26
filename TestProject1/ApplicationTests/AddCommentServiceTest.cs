@@ -69,7 +69,7 @@ namespace TestProject1.ApplicationTests
         }
 
         [Fact]
-        public async Task ExecuteAsync_ShouldBeEquivalentToId()
+        public async Task ExecuteAsync_ResultIdShouldBeEquivalentToAddedCommentId()
         {
             var comment = _fixture.Create<Comment>();
 
@@ -80,19 +80,19 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<AddCommentService>>();
 
-            var add = new AddCommentService(
+            var addCommentService = new AddCommentService(
                 _cosmosDbServiceMock,
                 log.Object);
 
             var addRequest = _fixture.Create<AddCommentRequest>();
 
-            var result = await add.ExecuteAsync(addRequest);
+            var result = await addCommentService.ExecuteAsync(addRequest);
             
             result.Id.Should().BeEquivalentTo(result.Id);
         }
 
         [Fact]
-        public async Task ExecuteAsync_ShouldBeEquivalentToMessage()
+        public async Task ExecuteAsync_ResultMessageShouldBeEquivalentToAddedCommentMessage()
         {
             var comment = _fixture.Create<Comment>();
 
@@ -245,7 +245,6 @@ namespace TestProject1.ApplicationTests
                 .Verifiable();
 
             var log = new Mock<ILogger<AddCommentService>>();
-
 
             var add = new AddCommentService(
                 _cosmosDbServiceMock,

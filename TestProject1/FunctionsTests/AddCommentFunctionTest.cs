@@ -5,6 +5,7 @@ using FluentAssertions;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Functions;
+using Kainos.Comments.Functions.Validators;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
@@ -22,8 +23,9 @@ namespace TestProject1.FunctionsTests
             var addCommentResponse = new AddCommentResponse();
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<AddCommentRequest>()))
                 .ReturnsAsync(addCommentResponse);
+            var addCommentValidator = new AddCommentRequestValidator();
 
-            var endpoint = new AddCommentFunction(serviceMock.Object);
+            var endpoint = new AddCommentFunction(serviceMock.Object, addCommentValidator);
 
             var request = new AddCommentRequest
             {
@@ -46,8 +48,9 @@ namespace TestProject1.FunctionsTests
             var serviceMock = new Mock<IExecutable<AddCommentRequest, AddCommentResponse>>();
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<AddCommentRequest>()))
                 .Throws<Exception>();
+            var addCommentValidator = new AddCommentRequestValidator();
 
-            var endpoint = new AddCommentFunction(serviceMock.Object);
+            var endpoint = new AddCommentFunction(serviceMock.Object, addCommentValidator);
 
             var request = new AddCommentRequest
             {
@@ -74,9 +77,11 @@ namespace TestProject1.FunctionsTests
             var serviceMock = new Mock<IExecutable<AddCommentRequest, AddCommentResponse>>();
             serviceMock.Setup(_ => _.ExecuteAsync(It.IsAny<AddCommentRequest>()))
                 .Throws<Exception>();
-        
-            var endpoint = new AddCommentFunction(serviceMock.Object);
-        
+
+            var addCommentValidator = new AddCommentRequestValidator();
+
+            var endpoint = new AddCommentFunction(serviceMock.Object, addCommentValidator);
+
             var requestMock = HttpRequestHelper.CreateMockRequest(json);
         
             var response = await endpoint.AddCommentAsync(requestMock.Object, new NullLogger<AddCommentFunction>());

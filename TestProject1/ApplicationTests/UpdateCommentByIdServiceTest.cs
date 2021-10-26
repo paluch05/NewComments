@@ -27,13 +27,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<UpdateCommentByIdService>>();
 
-            var update = new UpdateCommentByIdService(
+            var updateCommentByIdService = new UpdateCommentByIdService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var updateRequest = _fixture.Create<UpdateCommentRequest>();
 
-            await update.ExecuteAsync(updateRequest);
+            await updateCommentByIdService.ExecuteAsync(updateRequest);
 
             Mock.Get(cosmosDbServiceMock.Object)
                 .Verify(c => c.UpdateCommentByIdAsync(updateRequest.Id, It.IsAny<Comment>()), Times.Once);
@@ -49,13 +49,13 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<UpdateCommentByIdService>>();
 
-            var update = new UpdateCommentByIdService(
+            var updateCommentByIdService = new UpdateCommentByIdService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var updateRequest = _fixture.Create<UpdateCommentRequest>();
 
-            var result = await update.ExecuteAsync(updateRequest);
+            var result = await updateCommentByIdService.ExecuteAsync(updateRequest);
             result.Should().BeOfType<UpdateCommentResponse>();
         }
 
@@ -69,12 +69,12 @@ namespace TestProject1.ApplicationTests
 
             var log = new Mock<ILogger<UpdateCommentByIdService>>();
 
-            var update = new UpdateCommentByIdService(
+            var updateCommentByIdService = new UpdateCommentByIdService(
                 cosmosDbServiceMock.Object,
                 log.Object);
 
             var updateRequest = _fixture.Create<UpdateCommentRequest>();
-            Func<Task<UpdateCommentResponse>> func = async () => await update.ExecuteAsync(updateRequest);
+            Func<Task<UpdateCommentResponse>> func = async () => await updateCommentByIdService.ExecuteAsync(updateRequest);
             await func.Should().ThrowAsync<UpdateCommentByIdException>();
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using Kainos.Comments.Application.Model.Database;
+﻿using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Application.Queue;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.WebJobs;
@@ -8,22 +7,20 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Kainos.Comments.Functions.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    public class CosmosInsertFunction
+    public class DatabaseInsertFunction
     {
         private readonly IQueueService _queueService;
 
-        public CosmosInsertFunction(
+        public DatabaseInsertFunction(
            IQueueService queueService)
         {
             _queueService = queueService;
         }
 
-        [FunctionName("CosmosInsertFunction")]
+        [FunctionName("DatabaseInsertFunction")]
         public async Task Run([CosmosDBTrigger(
                 databaseName: "Comments",
                 collectionName: "Comments",
