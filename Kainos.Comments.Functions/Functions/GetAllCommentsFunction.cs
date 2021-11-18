@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
+using Kainos.Comments.Functions.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -32,9 +34,10 @@ namespace Kainos.Comments.Functions.Functions
             {
                 getComment = await _repository.ExecuteAsync(new GetAllCommentsRequest());
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message);
+                log.LogError(ex, ex.Message);
+                return new InternalServerErrorResult();
             }
             
             log.LogInformation("List of all comments: ");

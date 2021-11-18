@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Model.Database;
 
 namespace Kainos.Comments.Application.Cosmos
@@ -8,8 +7,6 @@ namespace Kainos.Comments.Application.Cosmos
     public interface ICosmosDbService
     {
         Task<IEnumerable<Comment>> GetAllCommentsAsync();
-
-        Task<Comment> GetCommentByIdAsync(string id);
 
         Task<Comment> AddCommentAsync(Comment comment);
 

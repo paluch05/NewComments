@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Cosmos;
+using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model.Database;
 using Kainos.Comments.Application.Model.Domain;
 using Microsoft.Extensions.Logging;
@@ -37,7 +38,7 @@ namespace Kainos.Comments.Application.Services
             catch (Exception e)
             {
                 _log.LogError(e.Message);
-                throw;
+                throw new UpdateCommentByIdException("Unable to update a comment.");
             }
 
             return new UpdateCommentResponse

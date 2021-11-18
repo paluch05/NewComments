@@ -14,29 +14,26 @@ namespace Kainos.Comments.Functions
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            JsonConvert.DefaultSettings = () =>
-                new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                };
-
             var cosmosDbConfiguration = GetCosmosDbConfiguration();
+            var queueConfiguration = GetQueueConfiguration();
 
-            builder.Services.Configure<CosmosDbConfiguration>(configuration =>
+            builder.Services.Configure<Configuration>(configuration =>
             {
                 configuration.CosmosDbConnectionString = cosmosDbConfiguration.CosmosDbConnectionString;
                 configuration.DatabaseName = cosmosDbConfiguration.DatabaseName;
                 configuration.CommentContainerName = cosmosDbConfiguration.CommentContainerName;
                 configuration.BlackListContainerName = cosmosDbConfiguration.BlackListContainerName;
+                configuration.QueueConnectionString = queueConfiguration.QueueConnectionString;
+                configuration.QueueName = queueConfiguration.QueueName;
             });
 
-            builder.Services.AddApplication(cosmosDbConfiguration);
+            builder.Services.AddApplication(cosmosDbConfiguration, queueConfiguration);
         }
 
-        private static CosmosDbConfiguration GetCosmosDbConfiguration()
+
+        private static Configuration GetCosmosDbConfiguration()
         {
-            return new CosmosDbConfiguration
+            return new Configuration
             {
                 CosmosDbConnectionString = Environment.GetEnvironmentVariable("CosmosDbConnectionString"),
                 DatabaseName = Environment.GetEnvironmentVariable("DatabaseName"),
@@ -44,9 +41,14 @@ namespace Kainos.Comments.Functions
                 BlackListContainerName = Environment.GetEnvironmentVariable("BlackListContainerName")
             };
         }
+
+        private static Configuration GetQueueConfiguration()
+        {
+            return new Configuration
+            {
+                QueueConnectionString = Environment.GetEnvironmentVariable("QueueConnectionString"),
+                QueueName = Environment.GetEnvironmentVariable("QueueName")
+            };
+        }
     }
 }
-
-
-// cosmos trigger, queue trigger z cenzura slow. baza z brzydkimi slowkami i zamieniane sa na gwiazdki, jedna kolekcja z comment, druga black list.
-// azure storage queue, http trigger, blacklist ma miec recordy kazde slowo osobno

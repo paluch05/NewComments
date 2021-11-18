@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using FluentValidation;
 using Kainos.Comments.Application.Model;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Validators;
@@ -14,14 +15,17 @@ using Newtonsoft.Json;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    class AddCommentFunction
+    public class AddCommentFunction
     {
         private readonly IExecutable<AddCommentRequest, AddCommentResponse> _repository;
+        private readonly IValidator<AddCommentRequest> _validator;
 
         public AddCommentFunction(
-            IExecutable<AddCommentRequest, AddCommentResponse> repository)
+            IExecutable<AddCommentRequest, AddCommentResponse> repository,
+            IValidator<AddCommentRequest> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
         [FunctionName(nameof(AddCommentAsync))]
@@ -30,44 +34,42 @@ namespace Kainos.Comments.Functions.Functions
                 Route = Routes.Add)]
             HttpRequest req, ILogger log)
         {
+            log.LogInformation("Creating a comment");
+
             var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             AddCommentRequest addCommentRequest;
 
             try
             {
-                addCommentRequest =
-                     JsonConvert.DeserializeObject<AddCommentRequest>(
-                         requestBody);
+                addCommentRequest = JsonConvert.DeserializeObject<AddCommentRequest>(requestBody);
             }
-            catch (Exception e)
+            catch (JsonSerializationException jse)
             {
-                log.LogError(e, e.Message);
-                log.LogError("Your Json format is incorrect.");
+                log.LogError(jse.Message);
 
-                return new BadRequestObjectResult(new
+                return new BadRequestObjectResult( new { reason = "Wrong Json format." });
+            }
+
+            try
+            {
+                var validationResult = await _validator.ValidateAsync(addCommentRequest);
+
+                if (!validationResult.IsValid)
                 {
-                    reason = e.Message
-                });
+                    log.LogError(validationResult.ToString());
+
+                    return new BadRequestObjectResult(new {reason = validationResult.ToString()});
+                }
+
+                var addCommentResponse = await _repository.ExecuteAsync(addCommentRequest);
+
+                return new OkObjectResult(addCommentResponse);
             }
-
-            var addCommentRequestValidator = new AddCommentRequestValidator();
-            var validationResult = await addCommentRequestValidator.ValidateAsync(addCommentRequest);
-
-            if (!validationResult.IsValid)
+            catch (Exception ex)
             {
-                log.LogError(validationResult.ToString());
-
-                return new BadRequestObjectResult(new { reason = validationResult.ToString() });
+                log.LogError(ex, ex.Message);
+                return new InternalServerErrorResult();
             }
-
-            var addCommentResponse = await _repository.ExecuteAsync(addCommentRequest);
-
-            if (addCommentResponse == null)
-            {
-                return new InternalServerErrorResult(); // 500, ale z wiad
-            }
-
-            return new OkObjectResult(addCommentResponse);
         }
     }
 }

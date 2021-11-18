@@ -2,11 +2,13 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Web.Http;
+using FluentValidation;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -14,14 +16,17 @@ using Newtonsoft.Json;
 
 namespace Kainos.Comments.Functions.Functions
 {
-    class UpdateCommentByIdFunction
+    public class UpdateCommentByIdFunction
     {
         private readonly IExecutable<UpdateCommentRequest, UpdateCommentResponse> _repository;
+        private readonly IValidator<UpdateCommentRequest> _updateValidator;
 
         public UpdateCommentByIdFunction(
-            IExecutable<UpdateCommentRequest, UpdateCommentResponse> repository)
+            IExecutable<UpdateCommentRequest, UpdateCommentResponse> repository,
+            IValidator<UpdateCommentRequest> updateValidator)
         {
             _repository = repository;
+            _updateValidator = updateValidator;
         }
 
         [FunctionName(nameof(UpdateCommentByIdAsync))]
@@ -37,39 +42,35 @@ namespace Kainos.Comments.Functions.Functions
 
             try
             {
-                updateCommentRequest =
-                    JsonConvert.DeserializeObject<UpdateCommentRequest>(
-                        requestBody);
+                updateCommentRequest = JsonConvert.DeserializeObject<UpdateCommentRequest>(requestBody);
             }
-            catch (Exception e)
+            catch (JsonSerializationException jse)
             {
-                log.LogError(e, e.Message);
-                log.LogError("Your JSON format is incorrect");
+                log.LogError(jse, jse.Message);
 
                 return new BadRequestObjectResult(new
-                { reason = e.Message });
+                { reason = "Wrong Json format." });
             }
-
             updateCommentRequest.Id = id;
-
-            var updateCommentRequestValidator = new UpdateCommentRequestValidator();
-            var validationResult = await updateCommentRequestValidator.ValidateAsync(updateCommentRequest);
-
-            if (!validationResult.IsValid)
-            {
-                return new BadRequestObjectResult(validationResult.Errors);
-            }
 
             try
             {
+                var validationResult = await _updateValidator.ValidateAsync(updateCommentRequest);
+
+                if (!validationResult.IsValid)
+                {
+                    return new BadRequestObjectResult(new {reason = validationResult.Errors});
+                }
+
                 var updateCommentResponse = await _repository.ExecuteAsync(updateCommentRequest);
 
                 log.LogInformation("Comment successfully updated.");
 
                 return new OkObjectResult(updateCommentResponse);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                log.LogError(ex.Message);
                 return new InternalServerErrorResult();
             }
         }

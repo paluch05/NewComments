@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using Kainos.Comments.Application.Configuration;
+using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model.Database;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
@@ -19,7 +19,7 @@ namespace Kainos.Comments.Application.Cosmos
 
         public CosmosDbService(
             CosmosClient cosmosClient, 
-            IOptions<CosmosDbConfiguration> cosmosDbConfiguration,
+            IOptions<Configuration.Configuration> cosmosDbConfiguration,
             ILogger<CosmosDbService> log)
         {
             _commentsContainer = cosmosClient.GetContainer(cosmosDbConfiguration.Value.DatabaseName, cosmosDbConfiguration.Value.CommentContainerName);
@@ -33,27 +33,10 @@ namespace Kainos.Comments.Application.Cosmos
             using var setIterator = _commentsContainer.GetItemLinqQueryable<Comment>().ToFeedIterator();
             while (setIterator.HasMoreResults)
             {
-                foreach (var comment in await setIterator.ReadNextAsync())
-                {
-                    allComments.Add(comment);
-                }
+                allComments.AddRange(await setIterator.ReadNextAsync());
             }
 
             return allComments;
-        }
-
-        public async Task<Comment> GetCommentByIdAsync(string id)
-        {
-            try
-            {
-                var response = await _commentsContainer.ReadItemAsync<Comment>(id, new PartitionKey(id));
-                return response.Resource;
-            }
-            catch (CosmosException ce) when (ce.StatusCode == HttpStatusCode.NotFound)
-            {
-                _log.LogError(ce.Message);
-                return null;
-            }
         }
 
         public async Task<Comment> AddCommentAsync(Comment comment)
@@ -63,9 +46,9 @@ namespace Kainos.Comments.Application.Cosmos
                var response = await _commentsContainer.CreateItemAsync<Comment>(comment);
                 return response.Resource;
             }
-            catch (Exception e)
+            catch (CosmosException ce)
             {
-                _log.LogError(e, e.Message);
+                _log.LogError(ce.Message);
                 return null;
             }
         }
@@ -91,7 +74,7 @@ namespace Kainos.Comments.Application.Cosmos
             catch (Exception e)
             {
                 _log.LogError(e.Message);
-                throw;
+                throw new UpdateCommentByIdException("Unable to update a comment");
             }
         }
 
