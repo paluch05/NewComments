@@ -4,7 +4,6 @@ using Kainos.Comments.Application.Extensions;
 using Kainos.Comments.Functions;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 
 [assembly:FunctionsStartup(typeof(Startup))]
 
@@ -16,6 +15,7 @@ namespace Kainos.Comments.Functions
         {
             var cosmosDbConfiguration = GetCosmosDbConfiguration();
             var queueConfiguration = GetQueueConfiguration();
+            var searchConfiguration = GetSearchConfiguration();
 
             builder.Services.Configure<Configuration>(configuration =>
             {
@@ -25,9 +25,15 @@ namespace Kainos.Comments.Functions
                 configuration.BlackListContainerName = cosmosDbConfiguration.BlackListContainerName;
                 configuration.QueueConnectionString = queueConfiguration.QueueConnectionString;
                 configuration.QueueName = queueConfiguration.QueueName;
+                configuration.ClientId = searchConfiguration.ClientId;
+                configuration.ClientSecret = searchConfiguration.ClientSecret;
+                configuration.AdminKey = searchConfiguration.AdminKey;
+                configuration.QueryKey = searchConfiguration.QueryKey;
+                configuration.SearchEndpoint = searchConfiguration.SearchEndpoint;
+                configuration.IndexName = searchConfiguration.IndexName;
             });
 
-            builder.Services.AddApplication(cosmosDbConfiguration, queueConfiguration);
+            builder.Services.AddApplication(cosmosDbConfiguration, queueConfiguration, searchConfiguration);
         }
 
 
@@ -48,6 +54,17 @@ namespace Kainos.Comments.Functions
             {
                 QueueConnectionString = Environment.GetEnvironmentVariable("QueueConnectionString"),
                 QueueName = Environment.GetEnvironmentVariable("QueueName")
+            };
+        }
+
+        private static Configuration GetSearchConfiguration()
+        {
+            return new Configuration
+            {
+                AdminKey = Environment.GetEnvironmentVariable("AdminKey"),
+                QueryKey = Environment.GetEnvironmentVariable("QueryKey"),
+                SearchEndpoint = Environment.GetEnvironmentVariable("SearchEndpoint"),
+                IndexName = Environment.GetEnvironmentVariable("IndexName")
             };
         }
     }

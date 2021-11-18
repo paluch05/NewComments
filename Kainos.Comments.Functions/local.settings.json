@@ -8,6 +8,10 @@
     "CommentContainerName": "Comments",
     "BlackListContainerName": "BlackList",
     "QueueConnectionString": "AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;DefaultEndpointsProtocol=http;BlobEndpoint=http://127.0.0.1:10000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;TableEndpoint=http://127.0.0.1:10002/devstoreaccount1;",
-    "QueueName": "updatetriggerqueue"
+    "QueueName": "updatetriggerqueue",
+    "AdminKey": "5F505838039CCC5D2D236B5F38D31A22",
+    "QueryKey": "48F4A2B95A272D6C09AF4B6427ED1412",
+    "SearchEndpoint": "https://aniascomment01.search.windows.net",
+    "IndexName": "comments"
   }
 }
