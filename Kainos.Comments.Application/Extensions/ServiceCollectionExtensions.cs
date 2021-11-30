@@ -55,6 +55,13 @@ namespace Kainos.Comments.Application.Extensions
                 c.QueueConnectionString = queueConfiguration.QueueConnectionString;
                 c.QueueName = queueConfiguration.QueueName;
             });
+            services.Configure<Configuration.Configuration>(c =>
+            {
+                c.IndexName = searchConfiguration.IndexName;
+                c.AdminKey = searchConfiguration.AdminKey;
+                c.QueryKey = searchConfiguration.QueryKey;
+                c.SearchEndpoint = searchConfiguration.SearchEndpoint;
+            });
             services.AddTransient<IValidator<AddCommentRequest>, AddCommentRequestValidator>();
             services.AddTransient<IValidator<UpdateCommentRequest>, UpdateCommentRequestValidator>();
             services.AddTransient<IExecutable<DeleteAllCommentsRequest, DeleteAllCommentsResponse>, DeleteAllCommentsService>();

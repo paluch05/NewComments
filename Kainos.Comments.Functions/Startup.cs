@@ -25,8 +25,6 @@ namespace Kainos.Comments.Functions
                 configuration.BlackListContainerName = cosmosDbConfiguration.BlackListContainerName;
                 configuration.QueueConnectionString = queueConfiguration.QueueConnectionString;
                 configuration.QueueName = queueConfiguration.QueueName;
-                configuration.ClientId = searchConfiguration.ClientId;
-                configuration.ClientSecret = searchConfiguration.ClientSecret;
                 configuration.AdminKey = searchConfiguration.AdminKey;
                 configuration.QueryKey = searchConfiguration.QueryKey;
                 configuration.SearchEndpoint = searchConfiguration.SearchEndpoint;

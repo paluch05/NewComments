@@ -11,8 +11,6 @@ namespace Kainos.Comments.Application.Configuration
     public string BlackListContainerName { get; set; }
     public string QueueConnectionString { get; set; }
     public string QueueName { get; set; }
-    public string ClientId { get; set; }
-    public string ClientSecret { get; set; }
     public string AdminKey { get; set; }
     public string QueryKey { get; set; }
     public string SearchEndpoint { get; set; }

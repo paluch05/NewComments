@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Search.Documents;
@@ -31,49 +32,59 @@ namespace Kainos.Comments.Application.Search
             _cosmosDbService = cosmosDbService;
             _log = log;
         }
-        
+
         public async Task CreateIndexAsync()
         {
-            var fields = new List<SearchField>();
-        
-            var idField = new SearchField("Id", SearchFieldDataType.String)
-            {
-                IsSearchable = false,
-                IsKey = true
-            };
-            fields.Add(idField);
-        
-            var authorField = new SearchField("Author", SearchFieldDataType.String)
-            {
-                IsSearchable = true,
-                IsHidden = false
-            };
-            fields.Add(authorField);
-        
-            var textField = new SearchField("Text", SearchFieldDataType.String)
-            {
-                IsSearchable = true,
-                IsHidden = false
-            };
-            fields.Add(textField);
+            var ifIndexExists = _searchIndex.GetIndexNames();
 
-            try
+            if (!ifIndexExists.Contains(_searchClient.IndexName))
             {
-                _log.LogInformation("Index successfully created.");
-                await _searchIndex.CreateOrUpdateIndexAsync(new SearchIndex(_searchClient.IndexName, fields));
+                var fields = new List<SearchField>();
+
+                var idField = new SearchField("Id", SearchFieldDataType.String)
+                {
+                    IsSearchable = false,
+                    IsKey = true
+                };
+                fields.Add(idField);
+
+                var authorField = new SearchField("Author", SearchFieldDataType.String)
+                {
+                    IsSearchable = true,
+                    IsHidden = false
+                };
+                fields.Add(authorField);
+
+                var textField = new SearchField("Text", SearchFieldDataType.String)
+                {
+                    IsSearchable = true,
+                    IsHidden = false
+                };
+                fields.Add(textField);
+
+                try
+                {
+                    _log.LogInformation("Index successfully created.");
+                    await _searchIndex.CreateOrUpdateIndexAsync(new SearchIndex(_searchClient.IndexName, fields));
+                }
+                catch (Exception e)
+                {
+                    _log.LogError(e.Message);
+                    throw new Exception(e.Message);
+                }
             }
-            catch (Exception e)
+            else
             {
-                _log.LogError(e.Message);
+                return;
             }
         }
 
         public async Task AddCommentsAsync()
         {
             _log.LogInformation("Adding comments to index.");
-            var allComments = await _cosmosDbService.GetAllSearchCommentAsync(); // albo dodac wszystkie rzeczy w def indeksu albo stworzyc nowa klase do search
+            var allComments = await _cosmosDbService.GetAllSearchCommentAsync();
             
-            var createArguments = allComments.Select(IndexDocumentsAction.Upload).ToArray(); // jak upsert
+            var createArguments = allComments.Select(IndexDocumentsAction.Upload).ToArray();
             var batch = IndexDocumentsBatch.Create(createArguments);
 
             try

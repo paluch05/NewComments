@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Search.Documents;
+using Azure.Search.Documents.Indexes.Models;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Search;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +36,7 @@ namespace Kainos.Comments.Functions.Functions
             var endpoint = new Uri("https://aniascomment01.search.windows.net");
             AzureKeyCredential credential = new AzureKeyCredential(queryKey);
             
-            // await _searchService.CreateIndexAsync();
+            await _searchService.CreateIndexAsync();
             await _searchService.AddCommentsAsync();
 
             var client = new Azure.Search.Documents.Indexes.SearchIndexClient(endpoint, credential);
@@ -48,7 +51,7 @@ namespace Kainos.Comments.Functions.Functions
                 );
             }
 
-            log.LogInformation("Searching succesfully ended.");
+            log.LogInformation("Searching successfully ended.");
             return new OkObjectResult(new {result = searchResults.GetResults()});
         }
     }
