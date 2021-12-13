@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Linq;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Exceptions;
 using Kainos.Comments.Application.Model.Database;
+using Kainos.Comments.Application.Model.Domain;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Extensions.Logging;
@@ -95,6 +96,34 @@ namespace Kainos.Comments.Application.Cosmos
         public async Task DeleteCommentByIdAsync(string id)
         {
             await _commentsContainer.DeleteItemAsync<Comment>(id, new PartitionKey(id));
+        }
+
+        public async Task DeleteAllComments()
+        {
+            var deleteAllComments = new List<Comment>();
+            using var setIterator = _commentsContainer.GetItemLinqQueryable<Comment>().ToFeedIterator();
+
+            while (setIterator.HasMoreResults)
+            {
+                deleteAllComments.AddRange(await setIterator.ReadNextAsync());
+            }
+
+            foreach (var id in deleteAllComments.Select(commentId => commentId.Id.ToString()))
+            {
+                await _commentsContainer.DeleteItemAsync<Comment>(id, new PartitionKey(id));
+            }
+        }
+
+        public async Task<IEnumerable<SearchComment>> GetAllSearchCommentAsync()
+        {
+            var allComments = new List<SearchComment>();
+            using var setIterator = _commentsContainer.GetItemLinqQueryable<SearchComment>().ToFeedIterator();
+            while (setIterator.HasMoreResults)
+            {
+                allComments.AddRange(await setIterator.ReadNextAsync());
+            }
+
+            return allComments;
         }
     }
 }

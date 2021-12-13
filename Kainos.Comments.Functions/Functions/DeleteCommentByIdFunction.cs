@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Services;
 using Kainos.Comments.Application.Model.Domain;
-using Kainos.Comments.Application.Services;
 using Kainos.Comments.Functions.Validators;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,8 +46,5 @@ namespace Kainos.Comments.Functions.Functions
                 Message = "Comment successfully deleted."
             });
         }
-
-        // getById czy usuwane id w ogole istnieje w db
-
     }
 }

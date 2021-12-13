@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Kainos.Comments.Application.Model.Database;
+using Kainos.Comments.Application.Model.Domain;
 
 namespace Kainos.Comments.Application.Cosmos
 {
@@ -15,5 +16,9 @@ namespace Kainos.Comments.Application.Cosmos
         Task DeleteCommentByIdAsync(string id);
 
         public Task<IEnumerable<BlackListItem>> GetAllBadWordsAsync();
+
+        Task DeleteAllComments();
+
+        Task<IEnumerable<SearchComment>> GetAllSearchCommentAsync();
     }
 }
