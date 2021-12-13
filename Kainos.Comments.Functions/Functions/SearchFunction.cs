@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Search.Documents;
-using Azure.Search.Documents.Indexes.Models;
 using Kainos.Comments.Application.Model.Domain;
 using Kainos.Comments.Application.Search;
 using Microsoft.AspNetCore.Http;
@@ -31,9 +28,10 @@ namespace Kainos.Comments.Functions.Functions
             ILogger log, string value)
         {
             log.LogInformation("Searching for comment");
-            
-            var queryKey = "48F4A2B95A272D6C09AF4B6427ED1412";
-            var endpoint = new Uri("https://aniascomment01.search.windows.net");
+
+            var queryKey = Environment.GetEnvironmentVariable("QueryKey");
+            var endpointValue = Environment.GetEnvironmentVariable("SearchEndpoint");
+            var endpoint = new Uri(endpointValue);
             AzureKeyCredential credential = new AzureKeyCredential(queryKey);
             
             await _searchService.CreateIndexAsync();
@@ -44,7 +42,7 @@ namespace Kainos.Comments.Functions.Functions
             var searchResults = searchClient.Search<SearchComment>(value).Value;
             foreach (Azure.Search.Documents.Models.SearchResult<SearchComment> result in searchResults.GetResults())
             {
-                var searchResult = new OkObjectResult($"Score:{result.Score}," + 
+                var searchResult = new OkObjectResult($"Score:{result.Score}," +  
                                                    $"Id:{result.Document.Id}," +
                                                    $"Author:{result.Document.Author}," +
                                                    $"Text:{result.Document.Text},"

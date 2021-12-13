@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Search.Documents;
 using Azure.Search.Documents.Indexes;
 using Azure.Search.Documents.Indexes.Models;
 using Azure.Search.Documents.Models;
 using Kainos.Comments.Application.Cosmos;
-using Kainos.Comments.Application.Model.Database;
-using Kainos.Comments.Application.Model.Domain;
 using Microsoft.Extensions.Logging;
 
 namespace Kainos.Comments.Application.Search
@@ -25,6 +21,7 @@ namespace Kainos.Comments.Application.Search
         public SearchService(SearchClient searchClient, 
             SearchIndexClient searchIndex,
             ICosmosDbService cosmosDbService,
+            
             ILogger<SearchService> log)
         {
             _searchClient = searchClient;
@@ -83,7 +80,6 @@ namespace Kainos.Comments.Application.Search
         {
             _log.LogInformation("Adding comments to index.");
             var allComments = await _cosmosDbService.GetAllSearchCommentAsync();
-            
             var createArguments = allComments.Select(IndexDocumentsAction.Upload).ToArray();
             var batch = IndexDocumentsBatch.Create(createArguments);
 
